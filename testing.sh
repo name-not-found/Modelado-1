@@ -1,2 +1,2 @@
 #!/bin/bash
-python /Modelado-1/main.py 
+python ./main.py 
