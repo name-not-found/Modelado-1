@@ -5,14 +5,20 @@
 from Graphics import graphic
 import numpy as np
 from sympy import *
-from readcol import fgetcols
+#from readcol import fgetcols
 
 #def f(x):
 #    return x**2 + 1
 
 x = Symbol('x')
-formulae = fgetcols('formulae.dat')
-y = sympify(formulae[0])
+#formulae = fgetcols('formulae.dat')
+#formulae_str = (formulae[0])[0]
+
+with open("formulae.dat") as f:
+	formulae = f.readlines()
+formulae_str = formulae[0]
+
+y=sympify(formulae_str)
 yprime = y.diff(x)
 f = lambdify(x,y,"numpy")
 
