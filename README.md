@@ -1,8 +1,6 @@
-DYNAMIC .py
-
+DYNAMIC SYSTEM SIMULATION
+Python version 3
 TO EXECUTE PROGRAM
 
-	:~/ python testing.py
-or
+	:~/sh testing.sh
 
-	:~/python main.py
