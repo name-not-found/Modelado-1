@@ -21,6 +21,8 @@ def flags():
         with open("filename") as f:
             formulae = f.readlines()
             formulae_str = formulae[0]
-            print("Using archive mode with" + formulae_str)
+            print("Using archive mode with " + formulae_str)
+            return formulae_str
     if equation_flag:
-        print("Using equation mode with" + formulae_str)
+        print("Using equation mode with " + formulae_str)
+        return formulae_str
