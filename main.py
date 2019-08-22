@@ -3,16 +3,8 @@ import Graphics
 import numpy as np
 from sympy import *
 import sys
+from iterar import iterar
 
-def iterar(its):
-    L = []
-    for it in its:
-        l = []
-        l.append(it)
-        for _ in range(8):
-            l.append( f(l[-1]) )
-        L.append( np.array(l).reshape(-1,1) )
-    return L
 
 if __name__ == "__main__":
 	x = Symbol('x')
