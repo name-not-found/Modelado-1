@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def iterar(its):
+def iterar(its,f):
     L = []
     for it in its:
         l = []
