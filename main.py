@@ -2,25 +2,15 @@
 # -*- coding:utf-8 -*-
 
 # Simulando un sistema dinámico
-#from Graphics import plotting
 import Graphics
 import numpy as np
 from sympy import *
 import sys
 
-#def f(x):
-#    return x**2 + 1
-
-#formulae = fgetcols('formulae.dat')
-#formulae_str = (formulae[0])[0]
-
-#with open("formulae.dat") as f:
-#	formulae = f.readlines()
-#formulae_str = formulae[0]
-
 file_flag = False
 equation_flag = False
 formulae_str = 'x'
+
 #./dynamic -f archivo.txt
 #./dynamic -e ecuacion
 n = len(sys.argv)
@@ -41,9 +31,9 @@ if equation_flag:
 	print("Using equation mode with" + formulae_str)
 
 x = Symbol('x')
-y = sympify(formulae_str)
+y = sympify(formulae_str) #no evaluable
 #yprime = y.diff(x)
-f = lambdify(x,y,'numpy')
+f = lambdify(x,y,'numpy') #funcion evaluable
 
 def iterar(its):
     L = []
