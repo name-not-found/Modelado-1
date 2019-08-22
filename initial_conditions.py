@@ -18,7 +18,7 @@ def flags():
                 formulae_str = sys.argv[i+1]
 
     if file_flag:
-        with open("filename") as f:
+        with open(filename) as f:
             formulae = f.readlines()
             formulae_str = formulae[0]
             print("Using archive mode with " + formulae_str)
