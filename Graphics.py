@@ -1,11 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plotting(orbitas, condiciones):
-	x = np.array(range(9)).reshape(-1,1)
+def plotting(orbita, N):
+	x = np.array(range(N)).reshape(-1,1)
 	
-	for a, c in zip(orbitas,condiciones):
-		plt.plot(x, a, label="x = {}".format(c))
+	plt.plot( np.array(range(N)), orbita)
 	
 	plt.yscale('log')
 	plt.legend()
