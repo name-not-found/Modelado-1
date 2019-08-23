@@ -1,16 +1,16 @@
-import initial_conditions
+import flags
 import Graphics
-import numpy as np
-from sympy import *
-import sys
 from iterar import iterar
+import dynamic_system
+from sympy import *
+import numpy as np
 
 if __name__ == "__main__":
-	x = Symbol('x')
-	y = sympify( initial_conditions.flags() ) #no evaluable
-	f = lambdify(x,y,'numpy') #funcion evaluable
+	eq0, a0, b0, n0, x0, N = flags.flags() 
+	f, x0, N = dynamic_system.dynamic_system( eq0, a0, b0, n0, x0, N )
 
-	_init = [0.1, 1., 10.]
-	arrays = iterar(_init,f)
-
-	Graphics.plotting(arrays, _init)
+	orbita = iterar( x0, f , N)
+	
+	print(orbita)
+	   
+	Graphics.plotting( orbita, N )
