@@ -31,7 +31,7 @@ def flags():
             if '-x0' in sys.argv[i]:
                 x0 = float(sys.argv[i+1])
             if '-N' in sys.argv[i]:
-                N = float(sys.argv[i+1])
+                N = int(sys.argv[i+1])
             
 
     if file_flag:
@@ -42,4 +42,4 @@ def flags():
             return formulae_str
     if equation_flag:
         print("Using equation mode with " + formulae_str)
-        return formulae_str, a, b, n, x0, N
+        return formulae_str, a, b, n, x0, N 
