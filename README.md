@@ -1,6 +1,6 @@
-#DYNAMIC SYSTEM SIMULATION
+# DYNAMIC SYSTEM SIMULATION
 
-##Python version 3
+## Python version 3
 
 TO EXECUTE PROGRAM
 
