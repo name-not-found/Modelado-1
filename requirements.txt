@@ -4,4 +4,6 @@ numpy==1.16.3
 readcol
 sympy
 pylab
-
+graphics
+sys
+argparse
