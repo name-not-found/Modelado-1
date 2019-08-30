@@ -1,7 +1,7 @@
 from sympy import *
 import numpy as np
 
-def dynamic_system(eq0, a0, b0, n0, x0, N):
+def dynamic_system(eq0, a0, b0, n0):
 	x, a, b, n = Symbol('x'), Symbol('a'), Symbol('b'), Symbol('n')
 	y = sympify(eq0) #no evaluable
 	y = y.subs(a, a0)
@@ -10,4 +10,4 @@ def dynamic_system(eq0, a0, b0, n0, x0, N):
 	
 	f = lambdify(x,y,'numpy') #funcion evaluable
 	
-	return f, x0, N
+	return f
