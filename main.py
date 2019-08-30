@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
 					orbita = iterar( z, f , N)
 					
-					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(z)+'_i'+str(N), fig, ax , orbita) 
+					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(z)+'_i'+str(N), fig, ax , orbita, N, eq0) 
 
 	
 	plt.savefig(eq0+'_a'+str(args.a)+'_b'+str(args.b)+'_n'+str(args.n)+'_x0'+str(args.x)+'_i'+str(args.N)+".png")
