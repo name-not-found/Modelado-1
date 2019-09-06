@@ -1,4 +1,4 @@
-# DYNAMIC SYSTEM SIMULATION
+# Modeling in Python
 
 ## Python version 3
 
@@ -10,12 +10,13 @@ The branches are:
 	master
 	Unidad_2
 
+### Branch master: Dynamic system; bacteria growth.
+
+The program shows the possible growth (in gr) of a bacteria colony inside the body against hours (h) using the equation __a*x**n+b__. 
 
 To test the program use:
 
 	:~/sh testing.sh
-
-This program works with the equation __a*x**n+b__.
 
 This program has the following params:
 	
