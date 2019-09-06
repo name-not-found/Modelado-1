@@ -20,13 +20,22 @@ This program works with the equation __a*x**n+b__.
 This program has the following params:
 	
    1. The __mode__: use -f filename to use file mode or -e to use equation mode.
+	e.g.
+	-f filename 
 
-   2. The __coeficient__ or "a", use -a initial_val final_val step
+   2. The __coeficient__ or "a". 
 	
-   3. The __power__ or "n", use -n initial_val final_val step
+   3. The __power__ or "n".
 	
-   4. The __constant__ term or "b", use -b initial_val final_val step
+   4. The __constant__ term or "b".
 	
-   5. The __initial__ conditions, use -x init stop step
+   5. The __initial__ conditions.
 	
-   6. The __number__ of iterations, use -N number_of_its
+   6. The __number__ of iterations.
+
+Example use:
+	
+	python3 main.py -f formulae.dat -a "2. 3. 1." -b "0. 1. 1." -n "1. 2. 1." -x "1. 11. 1." -N 9
+or
+
+	python3 main.py -e a*x**n+b -a "2. 3. 1." -b "0. 1. 1." -n "1. 2. 1." -x "1. 11. 1." -N 9
