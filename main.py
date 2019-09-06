@@ -14,10 +14,10 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Used for plotting equations')
 	parser.add_argument('-f', help='filename', type = str) 
 	parser.add_argument('-e', help='equation', type = str)
-	parser.add_argument('-a', help='a term of ax^n+b', type = str, default = [1]) #reciba lista de argumentos
-	parser.add_argument('-n', help='a term of ax^n+b', type = str, default = [1]) #reciba lista de argumentos
-	parser.add_argument('-b', help='a term of ax^n+b', type = str, default = [0]) #reciba lista de argumentos
-	parser.add_argument('-x', help='initial condition', type = str, default = [1]) #reciba lista de argumentos
+	parser.add_argument('-a', help='a term of ax^n+b', type = str, default = "1 2 1") #reciba lista de argumentos
+	parser.add_argument('-n', help='a term of ax^n+b', type = str, default = "1 2 1") #reciba lista de argumentos
+	parser.add_argument('-b', help='a term of ax^n+b', type = str, default = "0 .5 1") #reciba lista de argumentos
+	parser.add_argument('-x', help='initial condition', type = str, default = "1 2 1") #reciba lista de argumentos
 	parser.add_argument('-N', help='number of iterations', type = int, default = 8) 
 	
 	args = parser.parse_args()
@@ -36,6 +36,8 @@ if __name__ == "__main__":
 	#eq0, a0, b0, n0, x0, N = flags.flags() 
 	
 	fig, ax = plt.subplots()
+	mitosis = 3.0
+	time = np.arange(0, N*mitosis, mitosis) 
 	
 	for z in x0:
 		for a in a0:
@@ -45,7 +47,7 @@ if __name__ == "__main__":
 
 					orbita = iterar( z, f , N)
 					
-					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(z)+'_i'+str(N), fig, ax , orbita) 
+					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(z)+'_i'+str(N), fig, ax , orbita, N, eq0, time) 
 
 	
 	plt.savefig(eq0+'_a'+str(args.a)+'_b'+str(args.b)+'_n'+str(args.n)+'_x0'+str(args.x)+'_i'+str(args.N)+".png")
