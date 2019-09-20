@@ -4,12 +4,12 @@ from iterar import iterar
 import dynamic_system
 import rangos
 import function_system
-
 from sympy import *
 import numpy as np
 import argparse
 import matplotlib.pyplot as plt
 import random as rd
+from scipy.optimize import curve_fit
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Used for plotting equations')
@@ -18,6 +18,7 @@ if __name__ == "__main__":
 	parser.add_argument('-e', help='equation', type = str)
 	parser.add_argument('-r', help='random noise', type = str, default = 0)
 	parser.add_argument('-histo', help='plotting histogram', type = int)
+	parser.add_argument('-lvm', help='levenberg-marquardt', type = str)
 	parser.add_argument('-d', help='Evaluating dynamic system', type = str)
 	parser.add_argument('-a', help='a term of ax^n+b', type = str, default = "1 2 1") #reciba lista de argumentos
 	parser.add_argument('-n', help='a term of ax^n+b', type = str, default = "1 2 1") #reciba lista de argumentos
@@ -26,6 +27,7 @@ if __name__ == "__main__":
 	parser.add_argument('-N', help='number of iterations', type = int, default = 8) 
 	
 	args = parser.parse_args()
+	lvm_flag = False
 	dynamic_flag = False
 	noise_flag = False
 	histo_flag = False
@@ -33,6 +35,7 @@ if __name__ == "__main__":
 	obs_z = []
 	obs_d = []
 	obs_derr = []
+	x0 = []
 	
 	if args.f:
 		with open(args.f) as f:
@@ -49,9 +52,11 @@ if __name__ == "__main__":
 				if line[0] != "#":
 					z, d, d_err = line.split()
 					obs_z.append(float(z))
+					x0.append(float(z))
 					obs_d.append(float(d))
 					obs_derr.append(float(d_err))
-				
+			x0= np.array(x0)
+			obs_d= np.array(obs_d)	
 			#formulae_str = formulae[0]
 			#print("Using archive mode with " + obs_filename)
 			#eq0 = formulae_str
@@ -69,10 +74,15 @@ if __name__ == "__main__":
 		histo_flag = True
 		bind = args.histo
 		print("Activated histogram: "+str(bind))
+	if args.lvm:
+		lvm_flag = True
+		print("Activated lvm: ")
 		
 	#a*sin\(x\)+b
-	a0, b0, n0, x0, N = rangos.rangos(args.a), rangos.rangos(args.b), rangos.rangos(args.n), rangos.rangos(args.x0), args.N
+	a0, b0, n0, N = rangos.rangos(args.a), rangos.rangos(args.b), rangos.rangos(args.n), args.N
 	#eq0, a0, b0, n0, x0, N = flags.flags() 
+	if not obs_flag:
+		x0 = rangos.rangos(args.x0)
 	
 	fig, ax = plt.subplots()
 	if histo_flag:
@@ -91,16 +101,26 @@ if __name__ == "__main__":
 				
 						Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(z)+'_i'+str(N), fig, ax , orbita, N, eq0, time) 
 				else:
-					g = function_system.function_system( eq0, a, b, x0, n, noise_flag, noise)
-					f = function_system.function_system( eq0, a, b, x0, n, False, noise)
+					if noise_flag:
+						g = function_system.function_system( eq0, a, b, x0, n, noise_flag, noise)
+						Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(x0)+'_i', fig, ax , g, N, eq0, x0) 
+					f = function_system.function_system( eq0, a, b, x0, n, False, 0)
 					
-					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(x0)+'_i', fig, ax , g, N, eq0, x0) 
 					Graphics.plotting( eq0+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(x0)+'_i', fig, ax , f, N, eq0, x0) 
 					
 					if histo_flag:
-						Graphics.plot_histogram(fig_h, ax_h,f,g,bind)
+						if noise_flag:
+							Graphics.plot_histogram(fig_h, ax_h,f,g,bind)
+						else:
+							Graphics.plot_histogram(fig_h, ax_h,f,obs_d,bind)			
 					if obs_flag:
 						Graphics.plot_observations(fig, ax, obs_z, obs_d, obs_derr)
+					if lvm_flag:
+						xdata = x0
+						ydata = obs_d
+						func = function_system.func(eq0)
+						popt, pcov = curve_fit(func, xdata, ydata)
+						plotting(fig, ax, xdata, func(xdata, *popt),eq0)
 						
 	
 	plt.savefig(eq0+'_a'+str(args.a)+'_b'+str(args.b)+'_n'+str(args.n)+'_x0'+str(args.x0)+'_i'+str(args.N)+".png")
