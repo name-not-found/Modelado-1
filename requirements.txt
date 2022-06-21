@@ -1,6 +1,6 @@
 # Python Version 3.7.3
 matplotlib==3.0.3
-numpy==1.16.3
+numpy==1.22.0
 readcol
 sympy
 pylab
